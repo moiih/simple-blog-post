@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+
+<title>
+    {% block title %} User-Post {% endblock %}
+</title>
+
+{% load widget_tweaks %}
+
+{% block main %}
+
+<h1> Post Feeds </h1>
+
+<div class="container">
+    
+    <label for="switch"> <p style="font-family:cursive; font-size: 20px;"> <strong style="color: #fc9f1d;">Show All Posts:</strong> </p> </label>
+    <label class="switch" id="switch">
+        <input type="checkbox" name="" id="toogle" onclick="chkbox()">
+        <span class="slider round"></span>
+    </label>    
+    <br>
+
+    <script>
+        function chkbox() {
+            if (document.getElementById('toogle').checked == true ) {
+                location.replace("http://127.0.0.1:8080/all_posts/")
+            }
+        }
+    </script>
+
+
+    <div style="width: 400px;">
+
+        {% if user.is_authenticated %}
+        {% if snipps %}
+
+            {% for snipp in snipps reversed %}
+
+                <img src="{{ snipp.blogimg.url }}" alt="Image" height="300" width="400"/>
+                <h2 class="font-size-regular" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;";"> <a href="#"> {{ snipp.blogtitle }} </a> <span> <strong style="font-size: 14px; font-family: cursive; color: rgb(99, 99, 99); float: right; padding-top: 15px; border: none;"> &dash;&dash;{{ snipp.time }} on {{ snipp.date }}</strong> </span> </h2>      
+                <p style="margin-bottom: 0; font-family:cursive; color: brown;">&nbsp; {{ snipp.blogdesc }} </p>
+                <p style="font-size: 28px; margin-top: 0; font-family:cursive;"> &dash;&dash; <i>By</i> <b style="color: green;">{{ snipp.user }}</b> </p>
+                <br>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p> &nbsp; &nbsp; <strong><i>No Posts!!</i></strong> </p>
+
+        {% endif %}
+
+        {% endif %}
+
+        <a href="#top" class="btn btn-primary" style="float: right; ">Back To Top</a>
+        <br> <br> <br>
+
+    </div>
+
+</div>
+
+{% endblock main %}

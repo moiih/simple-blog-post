@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+<title>
+    {% block title %} Login {% endblock %}
+</title>
+
+{% block main %}
+
+<div class="elements">
+
+<h4 style="color: green;"> <u><i>Login</i></u> </h4>
+
+<form action="" method="POST">
+
+        {% csrf_token %}
+
+    <label for="fnm">Username:</label>
+    <input type="text" id="fnm" name="username">
+    
+    <label for="pwd">Password:</label>
+    <input type="password" id="pwd" name="password">
+    
+
+    <input type="submit" value="Login">
+
+</form>
+
+</div>
+
+{% if messages %}
+        
+        {% for message in messages  %}
+            <strong> {{ message }} </strong>
+        {% endfor %}
+            
+{% endif %}
+    
+{% endblock main %}    
